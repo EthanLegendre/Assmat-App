@@ -1,5 +1,21 @@
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/preflight.css" layer(base);
 @import "tailwindcss/utilities.css";
- 
+
 @import "nativewind/theme";
+
+@theme {
+  --color-rose: #F2559C;
+  --color-rose-deep: #D63384;
+  --color-violet: #7C3AED;
+  --color-violet-deep: #5B21B6;
+  --color-pink-pale: #FDEEF6;
+  --color-lavender-pale: #F2ECFB;
+  --color-green: #2FAE6B;
+  --color-green-pale: #E8F7EF;
+  --color-ink: #221733;
+  --color-ink-soft: #7A6C8C;
+  --color-ink-faint: #B7A9C9;
+  --color-line: #EFE3F3;
+  --color-bg: #F8F3FA;
+}
