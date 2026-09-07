@@ -43,6 +43,14 @@ export default function TabsLayout() {
                 href: null,
             }}>
             </Tabs.Screen>
+            <Tabs.Screen name="kidInfo" options={{
+                href: null,
+            }}>
+            </Tabs.Screen>
+            <Tabs.Screen name="editKid" options={{
+                href: null,
+            }}>
+            </Tabs.Screen>
         </Tabs>
     )
 }
