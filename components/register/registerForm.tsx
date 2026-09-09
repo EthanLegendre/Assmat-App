@@ -44,23 +44,23 @@ export function RegisterForm() {
                     <Text className="font-semibold text-[14px] text-[#7A6C8C]">Parent</Text>
                 </View>
             </View>
-            <View className="mt-6 flex-row self-center">
+            <View className="mt-4 flex-row self-center">
                 <View className="w-[40%]">
                     <Text className="font-bold text-ink">Prénom</Text>
-                    <TextInput autoCapitalize="words" value={prenom} onChangeText={setPrenom}  className="mt-2 mb-5 border-b-[1px] border-[#B7A9C9] h-[30px]" placeholderTextColor="#B7A9C9" placeholder="prénom"></TextInput>
+                    <TextInput autoCapitalize="words" value={prenom} onChangeText={setPrenom}  className="mt-2 mb-5 border-b-[1px] border-[#B7A9C9] py-1" placeholderTextColor="#B7A9C9" placeholder="prénom"></TextInput>
                 </View>
                 <View className="w-[50%] ml-10">
                     <Text className="font-bold text-ink">Nom</Text>
-                    <TextInput autoCapitalize="words" value={nom} onChangeText={setNom} className="mt-2 mb-5 border-b-[1px] border-[#B7A9C9] h-[30px]" placeholderTextColor="#B7A9C9" placeholder="Nom"></TextInput>
+                    <TextInput autoCapitalize="words" value={nom} onChangeText={setNom} className="mt-2 mb-5 border-b-[1px] border-[#B7A9C9] py-2" placeholderTextColor="#B7A9C9" placeholder="Nom"></TextInput>
                 </View>
             </View>
             <View className="w-full mt-1">
                 <Text className="font-bold text-ink">Adresse email</Text>
-                <TextInput keyboardType="email-address" autoComplete="email" autoCapitalize="none" value={email} onChangeText={setEmail}  className="mt-2 mb-5 border-b-[1px] border-[#B7A9C9] h-[30px]" placeholderTextColor="#B7A9C9" placeholder="prenom@exemple.com"></TextInput>
+                <TextInput keyboardType="email-address" autoComplete="email" autoCapitalize="none" value={email} onChangeText={setEmail}  className="mt-2 mb-5 border-b-[1px] border-[#B7A9C9] py-2" placeholderTextColor="#B7A9C9" placeholder="prenom@exemple.com"></TextInput>
             </View>
             <View className="w-full mt-1">
                 <Text className="font-bold text-ink">Mot de passe</Text>
-                <TextInput secureTextEntry value={password} onChangeText={setPassword}  className="mt-2 mb-5 border-b-[1px] border-[#B7A9C9] h-[30px]" placeholderTextColor="#B7A9C9" placeholder="8 caractères minimum"></TextInput>
+                <TextInput secureTextEntry value={password} onChangeText={setPassword} className="mt-2 mb-5 border-b-[1px] border-[#B7A9C9] py-2" placeholderTextColor="#B7A9C9" placeholder="8 caractères minimum"></TextInput>
             </View>
             <View className="flex-row items-center gap-4">
                 <Checkbox value={checked} onValueChange={setcheck} color={checked ? "#7C3AED" : undefined} className=""></Checkbox>
