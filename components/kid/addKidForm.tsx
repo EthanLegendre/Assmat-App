@@ -251,7 +251,7 @@ export function AddKidForm() {
       </Text>
       <View className="w-full mt-6">
         <Text className="font-bold text-ink">
-          Taux de rémunération horaire (euros)
+          Taux de rémunération horaire brut (euros)
         </Text>
         <TextInput
           value={tauxHoraire}
