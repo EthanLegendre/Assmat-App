@@ -22,7 +22,7 @@ export default function TabsLayout() {
             },
         }}>
             <Tabs.Screen name="homepage" options={{
-                title: "Acceuil",
+                title: "Accueil",
                 tabBarIcon: ({ color, size }) => (
                     <Ionicons name="home-outline" color={color} size={25}></Ionicons>
                 ),
