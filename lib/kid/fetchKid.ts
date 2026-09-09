@@ -17,6 +17,7 @@ export type Enfant = {
   created_at: string;
   updated_at: string;
   rémunération_taux_horaire: number;
+  indemnité_journalière: number;
 };
 
 export async function getHeureDebut(sessionId: string): Promise<{ data: string | null; error: string | null }> {
