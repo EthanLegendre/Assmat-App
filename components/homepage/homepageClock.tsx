@@ -32,7 +32,7 @@ export function HomepageClock() {
         <View>
             <View className="mt-8">
                 <Text className="text-[12px] font-semibold text-ink-soft">Bonjour {user?.prenom}</Text>
-                <Text className="font-black tracking-[2px] text-[30px] text-ink mt-0.5">Acceuil</Text>
+                <Text className="font-black tracking-[2px] text-[30px] text-ink mt-0.5">Accueil</Text>
             </View>
             <View className="w-full mt-6 rounded-[22px] bg-violet px-5 py-5 shadow-xl">
                 <View className="flex-row items-center justify-between">
