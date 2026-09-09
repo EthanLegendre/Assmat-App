@@ -1,18 +1,23 @@
+import { MainPlanning } from "@/components/mainPlanning";
 import { TopLogo } from "@/components/topLogo";
 import "@/global.css";
-import { Image, Text, View } from "react-native";
+import { Image, Text, View, ScrollView } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function App() {
+  const insets = useSafeAreaInsets();
+
   return (
-    <View className="h-[100%] flex-column items-center justify-center bg-white w-[100%]">
-      <TopLogo></TopLogo>
-      <Image
-        source={require("@/assets/images/build.png")}
-        className="w-70 h-70"
-      ></Image>
-      <Text className="font-bold text-[20px]">
-        Page en cours de developement !
-      </Text>
-    </View>
+    <ScrollView
+      style={{ paddingTop: insets.top }}
+      className="flex-1"
+      contentContainerStyle={{paddingBottom: insets.bottom + 40 }}
+    >
+      <View className="px-10 mt-5">
+        <TopLogo></TopLogo>
+      </View>
+      <Text className="font-black tracking-[2px] text-[30px] text-ink mt-10 px-10">Planning</Text>
+      <MainPlanning />
+    </ScrollView> 
   );
 }
