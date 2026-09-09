@@ -14,7 +14,7 @@ export default function App() {
     <ScrollView
       style={{ paddingTop: insets.top }}
       className="flex-1 bg-white"
-      contentContainerStyle={{ paddingHorizontal: 28, paddingBottom: 40 }}
+      contentContainerStyle={{ paddingHorizontal: 28, paddingBottom: insets.bottom + 40 }}
     >
       <TopLogo />
       <TopLogin />
@@ -26,7 +26,7 @@ export default function App() {
       </Text>
       <LoginForm></LoginForm>
       <GoogleOrApple />
-      <View className="flex-row mt-8 gap-3 self-center">
+      <View className="flex-row mt-8 gap-3 self-center mb-30">
         <Text className="text-ink-faint font-semibold text-[14px]">
           Pas encore de compte ?{" "}
           <Link href={"/register"} replace className="text-violet font-bold">
