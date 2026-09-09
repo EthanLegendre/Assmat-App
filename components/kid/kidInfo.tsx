@@ -1,7 +1,6 @@
 import { handleDeleteKid } from "@/lib/kid/handleDeleteKid";
 import { Enfant } from "@/lib/kid/fetchKid";
 import { createSession } from "@/lib/session/createSession";
-import { getSessionByKidId } from "@/lib/session/getSessionByIdKid";
 import { stopSession } from "@/lib/session/stopSession";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
@@ -39,7 +38,6 @@ export function KidInfo({ enfant, onClose }: Props) {
     checkKidInSession(enfant.id).then((setIsInSession));
   }, [enfant.id]);
 
-  console.log(isInSession);
   return (
     <Modal
       visible={!!enfant}
