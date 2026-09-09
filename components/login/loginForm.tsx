@@ -46,7 +46,7 @@ export function LoginForm() {
           keyboardType="email-address"
           value={email}
           onChangeText={setEmail}
-          className="mt-2 mb-5 border-b-[1px] border-[#B7A9C9] h-[30px]"
+          className="mt-2 mb-5 border-b-[1px] border-[#B7A9C9] py-2"
           placeholderTextColor="#B7A9C9"
           placeholder="prenom@exemple.com"
         ></TextInput>
@@ -57,7 +57,7 @@ export function LoginForm() {
           secureTextEntry
           value={password}
           onChangeText={setPassword}
-          className="mt-2 mb-5 border-b-[1px] border-[#B7A9C9] h-[30px]"
+          className="mt-2 mb-5 border-b-[1px] border-[#B7A9C9] py-2"
           placeholderTextColor="#B7A9C9"
           placeholder="••••••••"
         ></TextInput>
