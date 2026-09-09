@@ -4,7 +4,7 @@ import { Pressable, View, Text, Image } from "react-native"
 export function GoogleOrApple() {
     return (
         <View className="flex-column">
-            <View className="flex-row items-center gap-3 mt-7">
+            <View className="flex-row items-center gap-3 mt-3">
                 <View className="flex-1 h-[2px] bg-line" />
                 <Text className="text-s text-ink-faint font-medium">ou continuer avec</Text>
                 <View className="flex-1 h-[2px] bg-line" />
