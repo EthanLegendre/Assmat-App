@@ -7,13 +7,36 @@ import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import { Image, Pressable, Text, View } from "react-native";
 import { checkKidInSession } from "@/lib/kid/checkKidInSession";
+import { getSessionByKidId, Session } from "@/lib/session/getSessionByIdKid";
+import { getMinuteEcoulees } from "@/lib/utils/getMinuteEcoule";
 
 function KidRow({ enfant, onPress }: { enfant: Enfant; onPress: () => void }) {
   const [isInSession, setIsInSession] = useState(false);
+  const [session, setSession] = useState<Session | null>(null);
+  const taux_minute = enfant.rémunération_taux_horaire / 60;
+  const [argent, setArgent] = useState(0);
 
   useEffect(() => {
     checkKidInSession(enfant.id).then((setIsInSession));
+    getSessionByKidId(enfant.id, "en_cours").then(({ data, error}) => {
+      if (data) {
+        setSession(data);
+      }
+      if (error) {
+        console.error(error);
+      }
+    })
   }, [enfant.id]);
+
+    useEffect(() => {
+      if (!session) {
+        return;
+      }
+      const interval = setInterval(() => {
+            setArgent(getMinuteEcoulees(session.heure_debut) * taux_minute);
+        }, 1000);
+        return () => clearInterval(interval);
+    }, [session?.heure_debut]);
 
   return (
     <View
@@ -44,10 +67,15 @@ function KidRow({ enfant, onPress }: { enfant: Enfant; onPress: () => void }) {
               Prévu à 16h30
             </Text>
           ) : (
-            <Text>
-              In session
-            </Text>
-          ) }
+            <View className="flex-column justify-center">
+              <Text className="text-[12px] text-[#2FAE6B] font-semibold">
+                  En garde depuis {session?.heure_debut.slice(0, 5)}
+              </Text>
+              <Text className="text-[10px] font-black mt-3">
+                  +{(enfant.indemnité_journalière + argent).toFixed(2)}<Text className="text-[7px]">€</Text>
+              </Text>
+            </View>
+          )}
         </View>
       </View>
       <Pressable
