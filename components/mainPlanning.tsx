@@ -94,8 +94,8 @@ export function MainPlanning() {
                     >
                         {numero}
                     </Text>
-                    {jour.enfants.map((enfant) => (
-                        <View>
+                    {jour.enfants.map((enfant, index) => (
+                        <View key={index}>
                             <View className={`w-full py-1 mt-1 flex-row justify-between rounded pr-1 bg-[${enfant.couleur_avatar}] `}>
                                 <Text className=" ml-1 font-semibold text-white">{enfant.prenom} {enfant.nom}</Text>
                                 <Text className=" ml-1 font-semibold text-white">{enfant.heure_debut_prevue?.slice(0, 5)} - {enfant.heure_fin_prevue?.slice(0, 5)}</Text>
