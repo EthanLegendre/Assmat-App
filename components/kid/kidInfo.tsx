@@ -140,7 +140,7 @@ export function KidInfo({ enfant, onClose }: Props) {
                 </Text>
               </View>
             </Pressable>
-            <Pressable className="flex-row items-center mt-10 border-b-[1px] pb-6 border-b-[#EFE3F3]">
+            <Pressable className="flex-row items-center mt-10 border-b-[1px] pb-6 border-b-[#EFE3F3]" onPress={() => {router.replace(`/editKid?id=${enfant.id}`); onClose()}}>
               <View className="bg-[#EFE3F3] rounded-[7px] p-3">
                 <Ionicons name="create-outline" size={16} color={"#424242"} />
               </View>

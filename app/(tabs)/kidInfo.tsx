@@ -45,7 +45,7 @@ export default function App() {
         <Pressable
           className="flex-row items-center bg-white py-2.5 px-5 rounded-full border-1 border-[#E5D4FF]"
           onPress={() => {
-            router.replace("/editKid");
+            router.replace(`/editKid?id=${enfant.id}`);
           }}
         >
           <Ionicons
