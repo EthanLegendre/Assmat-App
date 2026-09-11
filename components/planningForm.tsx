@@ -1,14 +1,9 @@
-import { handleDeleteKid } from "@/lib/kid/handleDeleteKid";
-import { Enfant, fetchKid } from "@/lib/kid/fetchKid";
-import { createSession } from "@/lib/session/createSession";
-import { stopSession } from "@/lib/session/stopSession";
-import { Ionicons } from "@expo/vector-icons";
-import { router } from "expo-router";
+import { fetchKid } from "@/lib/kid/fetchKid";
 import { useEffect, useState } from "react";
-import { Modal, Pressable, Text, View, TextInput, Image } from "react-native";
-import { checkKidInSession } from "@/lib/kid/checkKidInSession";
+import { Modal, Pressable, Text, View, Image } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { addToPlanning } from "@/lib/utils/addToPlanning";
+import { Child } from "@/types/enfant";
 
 type Props = {
     visible: boolean;
@@ -17,7 +12,7 @@ type Props = {
 };
 
 export function PlanningForm({ visible, date, onClose }: Props) {
-    const [kids, setKids] = useState<Enfant[]>([]);
+    const [childs, setChilds] = useState<Child[]>([]);
     const [heureArrivée, setHeureArrivée] = useState<Date>(new Date())
     const [heureDepart, setHeureDepart] = useState<Date>(new Date())
     const [indexPick, setIndexPick] = useState(0);
@@ -25,17 +20,19 @@ export function PlanningForm({ visible, date, onClose }: Props) {
     useEffect(() => {
         fetchKid().then(({ data, error}) => {
             if (data) {
-                setKids(data);
+                setChilds(data);
             }
             if (error) {
                 console.error(error);
             }
         })
     })
+
     if (!visible) {
         return;
     }
-  return (
+
+    return (
     <Modal
       visible={true}
       transparent
@@ -52,26 +49,26 @@ export function PlanningForm({ visible, date, onClose }: Props) {
             <Text className="text-[40px] font-bold">{date.toLocaleDateString("fr-FR")}:</Text>
             <Text className="font-semibold text-[15px] py-5">Selectionner un enfant :</Text>
             <View className="flex-row gap-20 mt-2 flex-wrap justify-center">
-                {kids.map((enfant, index) => (
+                {childs.map((child, index) => (
                     <Pressable key={index} onPress={() => setIndexPick(index)}>
                         <View className={`border-1 pt-2 px-3 rounded-[10px] pb-3 shadow-lg flex-column items-center ${index === indexPick ? "border-violet bg-lavender-pale" : "border-ink-faint"}`}>
-                                {!enfant.photo_url ? (
+                                {!child.profilePictureUrl ? (
                                     <View
                                     className="w-[80px] h-[80px] rounded-full items-center justify-center"
-                                    style={{ backgroundColor: enfant.couleur_avatar }}
+                                    style={{ backgroundColor: child.avatarColor }}
                                     >
                                         <Text className="text-white font-extrabold">
-                                            {enfant.prenom.charAt(0)}
+                                            {child.firstname.charAt(0)}
                                         </Text>
                                     </View>
                                     ) : (
                                     <Image
-                                    source={{ uri: enfant.photo_url }}
+                                    source={{ uri: child.profilePictureUrl }}
                                     className="h-[80px] w-[80px] rounded-full">
                                     </Image>
                                 )}
-                                <Text className="mt-3 font-semibold">{enfant.prenom}</Text>
-                                <Text>{enfant.nom}</Text>
+                                <Text className="mt-3 font-semibold">{child.firstname}</Text>
+                                <Text>{child.lastname}</Text>
                         </View>
                     </Pressable>
                 ))}
@@ -105,7 +102,7 @@ export function PlanningForm({ visible, date, onClose }: Props) {
                 </View>
             </View>
             <Pressable
-                onPress={() => {onClose(); addToPlanning(kids[indexPick].id, heureArrivée, heureDepart, date)}}
+                onPress={() => {onClose(); addToPlanning(childs[indexPick].id, heureArrivée, heureDepart, date)}}
                 className="px-8 h-15 rounded-[17px] shadow-lg justify-center items-center mt-8 bg-violet"
             >
                 <Text className="font-bold text-white text-[16px]">Ajouter au planning</Text>

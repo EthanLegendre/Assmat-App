@@ -1,24 +1,6 @@
 import { supabase } from "@/lib/supabase";
-
-export type Enfant = {
-  id: string;
-  assmat_id: string;
-  nom: string;
-  prenom: string;
-  date_naissance: string;
-  couleur_avatar: string;
-  photo_url: string;
-  jours_garde: string[] | null;
-  contact_parent_nom: string;
-  contact_parent_prenom: string;
-  contact_parent_telephone: string;
-  contact_parent_email: string;
-  code_invitation: string;
-  created_at: string;
-  updated_at: string;
-  rémunération_taux_horaire: number;
-  indemnité_journalière: number;
-};
+import { Child } from "@/types/enfant";
+import { mapToChild } from "../utils/mapToChild";
 
 export async function getHeureDebut(sessionId: string): Promise<{ data: string | null; error: string | null }> {
     const { data, error } = await supabase
@@ -34,7 +16,7 @@ export async function getHeureDebut(sessionId: string): Promise<{ data: string |
     return { data: data.heure_debut, error: null };
 }
 
-export async function fetchKid(): Promise<{ data: Enfant[] | null; error: string | null}> {
+export async function fetchKid(): Promise<{ data: Child[] | null; error: string | null}> {
     const { data: { user } } = await supabase.auth.getUser();
 
     if (!user) {
@@ -45,10 +27,10 @@ export async function fetchKid(): Promise<{ data: Enfant[] | null; error: string
         return { data: null, error: error.message };
     }
 
-    return {data, error: null};
+    return {data: data.map(mapToChild), error: null};
 }
 
-export async function fetchOneKid(id :string): Promise<{ data: Enfant | null; error: string | null}> {
+export async function fetchOneKid(id :string): Promise<{ data: Child | null; error: string | null}> {
     const { data: { user } } = await supabase.auth.getUser();
 
     if (!user) {
@@ -58,5 +40,5 @@ export async function fetchOneKid(id :string): Promise<{ data: Enfant | null; er
     if (error) {
         return { data: null, error: error.message };
     }
-    return {data, error: null};
+    return {data: mapToChild(data), error: null};
 }

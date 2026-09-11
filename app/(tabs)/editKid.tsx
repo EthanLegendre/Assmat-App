@@ -1,6 +1,6 @@
 import { TopLogo } from "@/components/topLogo";
 import "@/global.css";
-import { Enfant, fetchOneKid } from "@/lib/kid/fetchKid";
+import { fetchOneKid } from "@/lib/kid/fetchKid";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { Text, View, ScrollView, Pressable, Image, TextInput } from "react-native";
@@ -13,6 +13,7 @@ import { handleUpdateKid } from "@/lib/kid/handleUpdateKid";
 import { supabase } from "@/lib/supabase";
 import { pickAndUploadPicture } from "@/lib/utils/uploadPicture";
 import { handleDeleteKid } from "@/lib/kid/handleDeleteKid";
+import { Child } from "@/types/enfant";
 
 function getIdColor(color :string) {
   if (color === "#F2559C")
@@ -28,7 +29,7 @@ function getIdColor(color :string) {
 
 export default function App() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const [enfant, setEnfant] = useState<Enfant | null>(null);
+  const [child, setChild] = useState<Child | null>(null);
   const insets = useSafeAreaInsets();
   const [newColor, setNewColor] = useState("");
   const [newColorId, setNewColorId] = useState(0);
@@ -46,7 +47,7 @@ export default function App() {
 
   useEffect(() => {
     fetchOneKid(id).then(({ data, error}) => {
-      setEnfant(data);
+      setChild(data);
       if (error) {
         console.error(error);
       }
@@ -91,22 +92,21 @@ export default function App() {
     router.replace("/homepage");
   }
 
-
   useEffect(() => {
-      if (!enfant) return;
-      setNewColor(enfant.couleur_avatar);
-      setNewColorId(getIdColor(enfant.couleur_avatar));
-      setNewNomEnfant(enfant.nom);
-      setNewPrenomEnfant(enfant.prenom);
-      setNewDateNaissance(enfant.date_naissance);
-      setNewParentPrenom(enfant.contact_parent_prenom);
-      setNewParentNom(enfant.contact_parent_nom);
-      setNewEmail(enfant.contact_parent_email);
-      setNewTel(enfant.contact_parent_telephone);
-      setNewTaux(enfant.rémunération_taux_horaire.toLocaleString());
-      setNewIndemnite(enfant.indemnité_journalière.toLocaleString());
-      setNewUrl(enfant.photo_url);
-  }, [enfant]);
+      if (!child) return;
+      setNewColor(child.avatarColor);
+      setNewColorId(getIdColor(child.avatarColor));
+      setNewNomEnfant(child.lastname);
+      setNewPrenomEnfant(child.firstname);
+      setNewDateNaissance(child.birthDate);
+      setNewParentPrenom(child.parentContactFirstname);
+      setNewParentNom(child.parentContactLastname);
+      setNewEmail(child.parentContactEmail);
+      setNewTel(child.parentContactNumber);
+      setNewTaux(child.hourlyWageRate.toLocaleString());
+      setNewIndemnite(child.dailyAllowance.toLocaleString());
+      setNewUrl(child.profilePictureUrl);
+  }, [child]);
 
   function handleDateChange(text: string) {
     setNewDateNaissance(formatDateInput(text));
@@ -133,9 +133,10 @@ export default function App() {
     }
   }
 
-  if (!enfant) {
+  if (!child) {
     return;
   }
+
   return (
     <ScrollView   style={{ paddingTop: insets.top }} className="flex-1 bg-white" contentContainerStyle={{ paddingHorizontal: 28, paddingBottom: 40 }}>
       <TopLogo></TopLogo>
@@ -143,7 +144,7 @@ export default function App() {
         <Pressable className="bg-[#F2ECFB] shadow-lg border-1 border-ink-faint rounded-full p-3" onPress={() => router.push("/homepage")}>
            <Ionicons name="arrow-back-outline" size={20} color="#221733" />
         </Pressable>
-        <Text className="ml-3 font-bold text-[35px]">Modifier {enfant.prenom}</Text>
+        <Text className="ml-3 font-bold text-[35px]">Modifier {child.firstname}</Text>
       </View>
       <View className="items-center mt-15">
         <View className="relative w-30 h-30">
@@ -309,7 +310,7 @@ export default function App() {
           Enregistrer les modifications
         </Text>
       </Pressable>
-      <Pressable className="mt-2 mb-8 w-[50%] self-center rounded-2xl border-[1.5px] border-red-500 w-full py-3 items-center" onPress={() => handleDeleteKid(enfant.id)}>
+      <Pressable className="mt-2 mb-8 w-[50%] self-center rounded-2xl border-[1.5px] border-red-500 w-full py-3 items-center" onPress={() => handleDeleteKid(child.id)}>
           <View className="flex-row items-center">
             <Ionicons name="trash-outline" color={"red"} size={17}></Ionicons>
             <Text className="text-red-500"> Retirer l'enfant</Text>

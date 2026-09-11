@@ -1,11 +1,12 @@
 import { View, Text, Pressable } from "react-native";
 import { getDateOfWeek } from "@/lib/utils/getDateWeek";
-import { fetchWeekKidPlanning, PlanningDay } from "@/lib/utils/fetchWeekKidPlanning";
+import { fetchWeekKidPlanning } from "@/lib/utils/fetchWeekKidPlanning";
 import { useEffect, useState } from "react";
 import { groupPlanningByDay } from "./homepage/homepageCalendar";
 import "@/global.css"
 import { Ionicons } from "@expo/vector-icons";
 import { PlanningForm } from "./planningForm";
+import { PlanningDay } from "@/types/planning";
 
 export function MainPlanning() {
     const [referenceDate, setReferenceDate] = useState(new Date());
@@ -94,15 +95,15 @@ export function MainPlanning() {
                     >
                         {numero}
                     </Text>
-                    {jour.enfants.map((enfant, index) => (
+                    {jour.child.map((child, index) => (
                         <View key={index}>
-                            <View className={`w-full py-1 mt-1 flex-row justify-between rounded pr-1 bg-[${enfant.couleur_avatar}] `}>
-                                <Text className=" ml-1 font-semibold text-white">{enfant.prenom} {enfant.nom}</Text>
-                                <Text className=" ml-1 font-semibold text-white">{enfant.heure_debut_prevue?.slice(0, 5)} - {enfant.heure_fin_prevue?.slice(0, 5)}</Text>
+                            <View className={`w-full py-1 mt-1 flex-row justify-between rounded pr-1 bg-[${child.avatarColor}] `}>
+                                <Text className=" ml-1 font-semibold text-white">{child.firstname} {child.lastname}</Text>
+                                <Text className=" ml-1 font-semibold text-white">{child.plannedStartTime?.slice(0, 5)} - {child.plannedEndTime?.slice(0, 5)}</Text>
                             </View>
                         </View>
                     ))}
-                    {jour.enfants.length === 0 && (
+                    {jour.child.length === 0 && (
                         <View className="w-full flex-column items-center justify-center">
                             <View className="border-ink-faint border-1 justify-center items-center rounded-full w-10 h-10" style={{ borderStyle: "dashed" }}>
                                 <Text className="text-ink-faint">+</Text>

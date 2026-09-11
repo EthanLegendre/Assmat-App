@@ -1,7 +1,7 @@
 import { MainPlanning } from "@/components/mainPlanning";
 import { TopLogo } from "@/components/topLogo";
 import "@/global.css";
-import { Image, Text, View, ScrollView } from "react-native";
+import { Text, View, ScrollView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function App() {

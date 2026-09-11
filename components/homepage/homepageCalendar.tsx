@@ -1,13 +1,9 @@
 import { View, Text, Image } from "react-native";
 import { getDateOfWeek } from "@/lib/utils/getDateWeek";
-import { fetchWeekKidPlanning, PlanningDay } from "@/lib/utils/fetchWeekKidPlanning";
+import { fetchWeekKidPlanning } from "@/lib/utils/fetchWeekKidPlanning";
 import { useEffect, useState } from "react";
-import { Enfant } from "@/lib/kid/fetchKid";
-
-export type EnfantPlanifie = Enfant & {
-  heure_debut_prevue: string | null;
-  heure_fin_prevue: string | null;
-};
+import { PlannedChild } from "@/types/enfant";
+import { PlanningDay } from "@/types/planning";
 
 
 export function groupPlanningByDay(entries: PlanningDay[], week: Date[]) {
@@ -17,11 +13,11 @@ export function groupPlanningByDay(entries: PlanningDay[], week: Date[]) {
 
     return {
       date,
-      enfants: enfantsCeJour.map((entry) => ({
-        ...entry.enfant,
-        heure_debut_prevue: entry.heure_debut_prevue,
-        heure_fin_prevue: entry.heure_fin_prevue
-      })) as EnfantPlanifie[],
+      child: enfantsCeJour.map((entry) => ({
+        ...entry.child,
+        plannedStartTime: entry.plannedStartTime,
+        plannedEndTime: entry.plannedEndTime
+      })) as PlannedChild[],
     };
   });
 }
@@ -59,21 +55,21 @@ export function HomepageCalendar() {
               </Text>
             </View>
             <View className="flex-column -space-x-1">
-              {jour.enfants.map((enfant) => (
-                !enfant.photo_url ? (
+              {jour.child.map((child) => (
+                !child.profilePictureUrl ? (
                   <View
-                    key={enfant.id}
+                    key={child.id}
                     className="w-[12px] h-[12px] rounded-full items-center justify-center"
-                    style={{ backgroundColor: enfant.couleur_avatar }}
+                    style={{ backgroundColor: child.avatarColor }}
                   >
                     <Text className=" text-[5px] text-white font-extrabold">
-                      {enfant.prenom.charAt(0)}
+                      {child.firstname.charAt(0)}
                     </Text>
                   </View>
                 ) : (
                   <Image
-                    key={enfant.id}
-                    source={{ uri: enfant.photo_url }}
+                    key={child.id}
+                    source={{ uri: child.profilePictureUrl }}
                     className="h-[12px] w-[12px] rounded-full"
                   />
                 )

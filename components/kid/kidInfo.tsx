@@ -1,5 +1,4 @@
 import { handleDeleteKid } from "@/lib/kid/handleDeleteKid";
-import { Enfant } from "@/lib/kid/fetchKid";
 import { createSession } from "@/lib/session/createSession";
 import { stopSession } from "@/lib/session/stopSession";
 import { Ionicons } from "@expo/vector-icons";
@@ -7,17 +6,18 @@ import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import { Modal, Pressable, Text, View } from "react-native";
 import { checkKidInSession } from "@/lib/kid/checkKidInSession";
+import { Child } from "@/types/enfant";
 
 type Props = {
-  enfant: Enfant;
+  child: Child;
   onClose: () => void;
 };
 
-export function KidInfo({ enfant, onClose }: Props) {
+export function KidInfo({ child, onClose }: Props) {
   const [isInSession, setIsInSession] = useState(false);
 
   async function handleCreateSession() {
-    const { data, error } = await createSession(enfant?.id);
+    const { data, error } = await createSession(child?.id);
     if (error) {
       console.error(error);
       return;
@@ -26,7 +26,7 @@ export function KidInfo({ enfant, onClose }: Props) {
   }
 
   async function handleStopSession() {
-    const { data, error } = await stopSession(enfant.id);
+    const { data, error } = await stopSession(child.id);
     if (error) {
       console.error(error);
       return;
@@ -35,12 +35,12 @@ export function KidInfo({ enfant, onClose }: Props) {
   }
 
   useEffect(() => {
-    checkKidInSession(enfant.id).then((setIsInSession));
-  }, [enfant.id]);
+    checkKidInSession(child.id).then((setIsInSession));
+  }, [child.id]);
 
   return (
     <Modal
-      visible={!!enfant}
+      visible={!!child}
       transparent
       animationType="fade"
       onRequestClose={onClose}
@@ -50,7 +50,7 @@ export function KidInfo({ enfant, onClose }: Props) {
         className="flex-1 items-center justify-center"
         onPress={onClose}
       >
-        {enfant && (
+        {child && (
           <Pressable
             onPress={(e) => e.stopPropagation()}
             className="bg-white rounded-3xl p-6 mx-8 w-[85%]"
@@ -58,18 +58,18 @@ export function KidInfo({ enfant, onClose }: Props) {
             <View className="flex-row border-b-[1px] py-5 border-b-[#EFE3F3]">
               <View
                 className="w-11 h-11 rounded-full items-center justify-center"
-                style={{ backgroundColor: enfant.couleur_avatar }}
+                style={{ backgroundColor: child.avatarColor }}
               >
                 <Text className="text-white font-extrabold">
-                  {enfant.prenom.charAt(0)}
+                  {child.lastname.charAt(0)}
                 </Text>
               </View>
               <View className="ml-3">
                 <Text className="font-bold text-[14.5px] text-ink">
-                  {enfant.prenom}
+                  {child.firstname}
                 </Text>
                 <Text className="text-ink-soft text-[12px] font-medium mt-0.5">
-                  {enfant.contact_parent_email}
+                  {child.parentContactEmail}
                 </Text>
               </View>
             </View>
@@ -112,7 +112,7 @@ export function KidInfo({ enfant, onClose }: Props) {
               className="flex-row items-center mt-10"
               onPress={() => {
                 onClose();
-                router.push(`/kidInfo?id=${enfant.id}`);
+                router.push(`/kidInfo?id=${child.id}`);
               }}
             >
               <View className="bg-[#F2ECFB] rounded-[7px] p-3">
@@ -140,7 +140,7 @@ export function KidInfo({ enfant, onClose }: Props) {
                 </Text>
               </View>
             </Pressable>
-            <Pressable className="flex-row items-center mt-10 border-b-[1px] pb-6 border-b-[#EFE3F3]" onPress={() => {router.replace(`/editKid?id=${enfant.id}`); onClose()}}>
+            <Pressable className="flex-row items-center mt-10 border-b-[1px] pb-6 border-b-[#EFE3F3]" onPress={() => {router.replace(`/editKid?id=${child.id}`); onClose()}}>
               <View className="bg-[#EFE3F3] rounded-[7px] p-3">
                 <Ionicons name="create-outline" size={16} color={"#424242"} />
               </View>
@@ -154,7 +154,7 @@ export function KidInfo({ enfant, onClose }: Props) {
               className="flex-row items-center mt-10"
               onPress={() => {
                 onClose();
-                handleDeleteKid(enfant.id);
+                handleDeleteKid(child.id);
               }}
             >
               <View className="bg-red-100 rounded-[7px] p-3">
