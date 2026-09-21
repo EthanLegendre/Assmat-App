@@ -94,7 +94,7 @@ export function LoginForm() {
       </View>
       <Pressable
         onPress={onPresseLogin}
-        className="px-8 h-15 rounded-[17px] shadow-xl justify-center items-center mt-5 bg-violet"
+        className="px-8 h-15 rounded-[17px] shadow-xl justify-center items-center mt-10 bg-violet"
       >
         <Text className="font-bold text-white text-[16px]">Se connecter</Text>
       </Pressable>

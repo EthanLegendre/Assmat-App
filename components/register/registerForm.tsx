@@ -34,43 +34,43 @@ export function RegisterForm() {
 
     return (
         <View className="flex-column">
-            <View className="flex-row gap-7 mt-5">
+            <View className="flex-row gap-7 mt-10">
                 <View className="flex-row items-center gap-4">
                     <Checkbox value={role === "assmat"} onValueChange={() => setRole("assmat")} color={role === "assmat" ? "#7C3AED" : undefined} className=""></Checkbox>
-                    <Text className="font-semibold text-[14px] text-[#7A6C8C]">Assmat</Text>
+                    <Text className="font-inter-semibold text-[14px] text-[#7A6C8C]">Assmat</Text>
                 </View>
                 <View className="flex-row items-center gap-4">
                     <Checkbox value={role === "parent"} onValueChange={() => setRole("parent")} color={role === "parent" ? "#7C3AED" : undefined} className=""></Checkbox>
-                    <Text className="font-semibold text-[14px] text-[#7A6C8C]">Parent</Text>
+                    <Text className="font-inter-semibold text-[14px] text-[#7A6C8C]">Parent</Text>
                 </View>
             </View>
-            <View className="mt-4 flex-row self-center">
+            <View className="mt-6 flex-row self-center">
                 <View className="w-[40%]">
-                    <Text className="font-bold text-ink">Prénom</Text>
-                    <TextInput autoCapitalize="words" value={prenom} onChangeText={setPrenom}  className="mt-2 mb-5 border-b-[1px] border-[#B7A9C9] py-1" placeholderTextColor="#B7A9C9" placeholder="prénom"></TextInput>
+                    <Text className="font-inter-bold text-ink">Prénom</Text>
+                    <TextInput autoCapitalize="words" value={prenom} onChangeText={setPrenom}  className="mt-2 mb-5 font-inter-regular border-[1px] rounded-[10px] bg-white pl-2 border-[#B7A9C9] py-1" placeholderTextColor="#B7A9C9" placeholder="prénom"></TextInput>
                 </View>
                 <View className="w-[50%] ml-10">
-                    <Text className="font-bold text-ink">Nom</Text>
-                    <TextInput autoCapitalize="words" value={nom} onChangeText={setNom} className="mt-2 mb-5 border-b-[1px] border-[#B7A9C9] py-2" placeholderTextColor="#B7A9C9" placeholder="Nom"></TextInput>
+                    <Text className="font-inter-bold text-ink">Nom</Text>
+                    <TextInput autoCapitalize="words" value={nom} onChangeText={setNom} className="mt-2 mb-5 border-[1px] border-[#B7A9C9] py-2 font-inter-regular rounded-[10px] bg-white pl-2" placeholderTextColor="#B7A9C9" placeholder="nom"></TextInput>
                 </View>
             </View>
             <View className="w-full mt-1">
-                <Text className="font-bold text-ink">Adresse email</Text>
-                <TextInput keyboardType="email-address" autoComplete="email" autoCapitalize="none" value={email} onChangeText={setEmail}  className="mt-2 mb-5 border-b-[1px] border-[#B7A9C9] py-2" placeholderTextColor="#B7A9C9" placeholder="prenom@exemple.com"></TextInput>
+                <Text className="font-inter-bold text-ink">Adresse email</Text>
+                <TextInput keyboardType="email-address" autoComplete="email" autoCapitalize="none" value={email} onChangeText={setEmail}  className="mt-2 mb-5 border-[1px] rounded-[10px] bg-white pl-2 font-inter-regular border-[#B7A9C9] py-2" placeholderTextColor="#B7A9C9" placeholder="prenom@exemple.com"></TextInput>
             </View>
             <View className="w-full mt-1">
-                <Text className="font-bold text-ink">Mot de passe</Text>
-                <TextInput secureTextEntry value={password} onChangeText={setPassword} className="mt-2 mb-5 border-b-[1px] border-[#B7A9C9] py-2" placeholderTextColor="#B7A9C9" placeholder="8 caractères minimum"></TextInput>
+                <Text className="font-inter-bold text-ink">Mot de passe</Text>
+                <TextInput secureTextEntry value={password} onChangeText={setPassword} className="mt-2 mb-5 border-[1px] bg-white rounded-[10px] pl-2 font-inter-regular border-[#B7A9C9] py-2" placeholderTextColor="#B7A9C9" placeholder="8 caractères minimum"></TextInput>
             </View>
             <View className="flex-row items-center gap-4">
                 <Checkbox value={checked} onValueChange={setcheck} color={checked ? "#7C3AED" : undefined} className=""></Checkbox>
-                <Text className="font-semibold text-[14px] text-[#7A6C8C]">J'accepte les <Text className="font_bold text-[#5B21B6]">conditions d'utilisation</Text> et la <Text className="font_bold text-[#5B21B6]">politique de confidentialité</Text></Text>
+                <Text className="font-inter-semibold text-[14px] text-[#7A6C8C]">J'accepte les <Text className="font_bold text-[#5B21B6]">conditions d'utilisation</Text> et la <Text className="font_bold text-[#5B21B6]">politique de confidentialité</Text></Text>
             </View>
             {errorMessage ? (
-                <Text className="text-rose-deep text-xs font-medium mt-2">{errorMessage}</Text>
+                <Text className="text-red-500 text-xs font-inter-semibold mt-2">{errorMessage}</Text>
             ) : null}
             <Pressable className="px-8 h-15 rounded-[17px] shadow-lg justify-center items-center mt-8 bg-violet" onPress={onPressSignUp} disabled={loading}>
-                <Text className="font-bold text-white text-[16px]">
+                <Text className="font-inter-bold text-white text-[16px]">
                     {loading ? "Création en cours ..." : "Créer ton compte"}
                 </Text>
             </Pressable>

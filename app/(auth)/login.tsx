@@ -26,10 +26,10 @@ export default function App() {
       </Text>
       <LoginForm></LoginForm>
       <GoogleOrApple />
-      <View className="flex-row mt-8 gap-3 self-center mb-30">
+      <View className="flex-row mt-8 gap-3 self-center mb-10">
         <Text className="text-ink-faint font-inter-semibold text-[14px]">
           Pas encore de compte ?{" "}
-          <Link href={"/register"} replace className="text-violet font-bold">
+          <Link href={"/register"} replace className="text-violet font-inter-bold">
             {" "}
             Créer un compte
           </Link>
