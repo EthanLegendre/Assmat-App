@@ -5,12 +5,12 @@ export function TopLogin() {
     return (
         <View className="flex-row bg-lavender-pale rounded-full p-1.5 mt-10 self-center">
             <Pressable className="px-8 py-3.5 rounded-full bg-white shadow-lg justify-center">
-                <Text className="font-bold text-violet text-[15px]">
+                <Text className="font-inter-bold text-violet text-[15px]">
                     Connexion
                 </Text>
             </Pressable>
             <Pressable className="px-8 py-3.5 rounded-full justify-center">
-                <Text className="font-bold text-ink-soft text-[15px]">
+                <Text className="font-inter-bold text-ink-soft text-[15px]">
                     Inscription
                 </Text>
             </Pressable>

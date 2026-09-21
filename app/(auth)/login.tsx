@@ -18,16 +18,16 @@ export default function App() {
     >
       <TopLogo />
       <TopLogin />
-      <Text className="mt-8 font-extrabold text-[39px]">
-        Ravie de te revoir
+      <Text className="mt-8 font-inter-extrabold text-[29px]">
+        Heureux de vous revoir
       </Text>
-      <Text className="mt-2 text-ink-soft font-medium text-[17px]">
-        Connect-toi pour retrouver ton espace.
+      <Text className="mt-2 text-ink-soft font-inter-regular text-[15px]">
+        Connectez-vous pour retrouver ton espace.
       </Text>
       <LoginForm></LoginForm>
       <GoogleOrApple />
       <View className="flex-row mt-8 gap-3 self-center mb-30">
-        <Text className="text-ink-faint font-semibold text-[14px]">
+        <Text className="text-ink-faint font-inter-semibold text-[14px]">
           Pas encore de compte ?{" "}
           <Link href={"/register"} replace className="text-violet font-bold">
             {" "}

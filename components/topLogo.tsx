@@ -1,11 +1,18 @@
-import { Text, View, Image } from "react-native";
-
+import { View, Image, Text } from "react-native";
 
 export function TopLogo() {
     return (
-        <View className="flex-row justify-between items-center">
-            <Text className="text-violet font-extrabold text-[30px]">Toctoc</Text>
-            <Image source={require("@/assets/images/mediaskol_logo.png")} className="h-15 w-16 mt-[-4px]"></Image>
-        </View>
-    )
-}
+        <View className="flex-row items-center justify-between mt-5">
+            <View className="flex-row items-center">
+                  <Image source={require("@/assets/images/toctoc-icon-512.png")} className="w-15 h-15"></Image>
+                <View className="flex-row ml-2">
+                    <Text className="text-[#7C3AED] text-[20px] font-inter-black">ki</Text>
+                    <Text className="text-[#D63384] text-[20px] font-inter-black">toc</Text>
+                </View>
+            </View>
+            <View>
+                <Image source={require("@/assets/images/mediaskol_logo.png")} className="h-15 w-16 mt-[-4px]"></Image>
+            </View>
+        </View> 
+    )  
+};
