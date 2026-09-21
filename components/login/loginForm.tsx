@@ -26,7 +26,7 @@ export function LoginForm() {
     } else {
       await AsyncStorage.removeItem("saved_email");
     }
-    router.replace("/homepage");
+    router.replace("/");
   }
 
   useEffect(() => {
