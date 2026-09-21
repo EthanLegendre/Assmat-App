@@ -18,4 +18,13 @@
   --color-ink-faint: #B7A9C9;
   --color-line: #EFE3F3;
   --color-bg: #F8F3FA;
+  --font-inter-thin: "Inter_100Thin";
+  --font-inter-extralight: "Inter_200ExtraLight";
+  --font-inter-light: "Inter_300Light";
+  --font-inter-regular: "Inter_400Regular";
+  --font-inter-medium: "Inter_500Medium";
+  --font-inter-semibold: "Inter_600SemiBold";
+  --font-inter-bold: "Inter_700Bold";
+  --font-inter-extrabold: "Inter_800ExtraBold";
+  --font-inter-black: "Inter_900Black";
 }
