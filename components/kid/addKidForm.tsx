@@ -287,7 +287,7 @@ export function AddKidForm() {
           size={20}
         ></Ionicons>
         <Text className="font-medium text-[#D63384] text-[15px] ml-5 mr-4">
-          Un code à 4 chiffres sera généré pour cet enfant. Tu pourras le
+          Un code d'invitation sera généré pour cet enfant. Vous pourrez le
           retrouver sur sa fiche.
         </Text>
       </View>
