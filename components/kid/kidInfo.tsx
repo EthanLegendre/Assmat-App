@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { Modal, Pressable, Text, View } from "react-native";
 import { checkKidInSession } from "@/lib/kid/checkKidInSession";
 import { Child } from "@/types/enfant";
+import { AddNewsForm } from "../news/addNewsForm";
 
 type Props = {
   child: Child;
@@ -15,6 +16,7 @@ type Props = {
 
 export function KidInfo({ child, onClose }: Props) {
   const [isInSession, setIsInSession] = useState(false);
+  const [showAddNewsForm, setShowAddNewsForm] = useState(false);
 
   async function handleCreateSession() {
     const { data, error } = await createSession(child?.id);
@@ -129,12 +131,12 @@ export function KidInfo({ child, onClose }: Props) {
                 </Text>
               </View>
             </Pressable>
-            <Pressable className="flex-row items-center mt-10">
+            <Pressable className="flex-row items-center mt-10" onPress={() => setShowAddNewsForm(true)}>
               <View className="bg-[#E8F7EF] rounded-[7px] p-3">
                 <Ionicons name="cube-outline" size={16} color={"#2FAE6B"} />
               </View>
               <View className="flex-col ml-4">
-                <Text className="font-bold text-[15px]">Rapport du jour</Text>
+                <Text className="font-bold text-[15px]">Ajouter une news</Text>
                 <Text className="text-ink-soft text-[12px] mt-1">
                   Text, vocal ou photo
                 </Text>
@@ -177,6 +179,9 @@ export function KidInfo({ child, onClose }: Props) {
           </Pressable>
         )}
       </Pressable>
+      {showAddNewsForm && (
+        <AddNewsForm visible={showAddNewsForm} childId={child.id} onClose={() => setShowAddNewsForm(false)}></AddNewsForm>
+      )}
     </Modal>
   );
 }
