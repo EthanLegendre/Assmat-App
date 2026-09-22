@@ -9,6 +9,7 @@ import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import { ScrollView, Text, View, Pressable } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { HomepageFastActions } from "@/components/homepage/homepageFastActions";
 
 export default function App() {
   const insets = useSafeAreaInsets();
@@ -23,17 +24,6 @@ export default function App() {
     });
   }, []);
 
-  useEffect(() => {
-    getNbrKidInSession().then(({ count, error}) => {
-      if (count) {
-        setNbrEnfantInSession(count);
-      }
-      if (error) {
-        console.error(error);
-      }
-    })
-  })
-
   if (!valideSession) {
     return null;
   }
@@ -41,21 +31,17 @@ export default function App() {
     <ScrollView
       style={{ paddingTop: insets.top }}
       className="flex-1 bg-white"
-      contentContainerStyle={{ paddingHorizontal: 28, paddingBottom: insets.bottom + 40 }}
+      contentContainerStyle={{ paddingBottom: insets.bottom + 40 }}
     >
-      <TopLogo />
-      <HomepageClock />
-      <Pressable onPress={() => router.replace("/planning")}>
+      <View className="mx-6">
+        <TopLogo />
+        <HomepageClock />
         <HomepageCalendar />
-      </Pressable>
-      <View className="flex-row justify-between mt-4">
-        <Text className="font-bold text-[16px] text-ink mt-7">Les enfants</Text>
-        <Text className="font-semibold text-ink-soft text-ink mt-7">
-          <Text className="font-black text-black text-[16px]">{nbrEnfantInSession}</Text>
-          {"  "}en garde
-        </Text>
       </View>
       <HomepageKidsRow />
+      <View className="mx-6 mt-12">
+        <HomepageFastActions/>
+      </View>
     </ScrollView>
   );
 }
