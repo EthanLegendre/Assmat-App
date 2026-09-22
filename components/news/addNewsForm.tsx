@@ -6,6 +6,8 @@ import { Ionicons } from "@expo/vector-icons"
 import { supabase } from "@/lib/supabase";
 import { addNews } from "@/lib/news/addNews";
 import { getSessionByKidId } from "@/lib/session/getSessionByIdKid";
+import { uploadVoiceMessage } from "@/lib/utils/uploadVoiceMessage";
+import { VoiceRecorder } from "./voiceRecoder";
 
 type Props = {
     visible: boolean;
@@ -22,7 +24,7 @@ export function AddNewsForm({ visible, childId, onClose }: Props) {
     const [loading, setLoading] = useState(false);
     const [typeSelect, setTypeSelect] = useState(0);
 
-  async function onPressPickPicture() {
+    async function onPressPickPicture() {
     const { data: { user }} = await supabase.auth.getUser();
 
     if (!user)
@@ -35,7 +37,18 @@ export function AddNewsForm({ visible, childId, onClose }: Props) {
     if (url) {
         setPhotoUrl(url);
     }
-  }
+    }
+
+    async function onPressVocal(uri: string) {
+        const { data: { user} } = await supabase.auth.getUser();
+        if (!user) return;
+        const { url, error } = await uploadVoiceMessage(user.id, uri);
+        if (error) {
+            console.error(error);
+            return;
+        }
+        if (url) setAudioUrl(url);
+    }
 
     async function onPressAjouter() {
         setErrorMessage("");
@@ -113,12 +126,7 @@ export function AddNewsForm({ visible, childId, onClose }: Props) {
                                 </View>
                             )}
                         </Pressable>
-                        <Pressable className="flex-1 py-5 items-center justify-center gap-2 rounded-[16px] border-[1.5px] border-dashed border-[#E5D4FF] bg-lavender-pale">
-                            <View className="w-9 h-9 rounded-full bg-white items-center justify-center">
-                                <Ionicons name="mic-outline" size={16} color="#5B21B6" />
-                            </View>
-                            <Text className="text-[12px] font-inter-bold text-ink">Message vocal</Text>
-                        </Pressable>
+                        <VoiceRecorder onRecorded={onPressVocal} />
                     </View>
 
                     <Pressable className="w-full rounded-[16px] mt-6 py-3.5 bg-violet justify-center items-center" onPress={() => onPressAjouter()}>
