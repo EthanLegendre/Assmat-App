@@ -51,6 +51,7 @@ export function LoginForm() {
         <TextInput
           keyboardType="email-address"
           value={email}
+          autoComplete="email" autoCapitalize="none"
           onChangeText={setEmail}
           className="mt-2 mb-5 rounded-[10px] border font-inter-regular border-[#B7A9C9] py-2 pl-3 bg-white"
           placeholderTextColor="#B7A9C9"
@@ -62,7 +63,7 @@ export function LoginForm() {
         <View className="w-full mt-1">
             <View className="relative w-full mt-2">
                 <TextInput
-                    secureTextEntry={showPassword}
+                    secureTextEntry={!showPassword}
                     value={password}
                     onChangeText={setPassword}
                     className="rounded-[10px] border w-full font-inter-regular border-[#B7A9C9] py-2 pl-3 pr-11 bg-white"
@@ -70,7 +71,7 @@ export function LoginForm() {
                     placeholder="••••••••"
                 />
                 <Pressable className="absolute right-3 top-0 bottom-0 justify-center" onPress={() => setShowPassword(!showPassword)}>
-                    <Ionicons name={showPassword ? "eye-off-outline" : "eye-outline"} size={20} color="#7A6C8C"/>
+                    <Ionicons name={!showPassword ? "eye-off-outline" : "eye-outline"} size={20} color="#7A6C8C"/>
                 </Pressable>
             </View>
         </View>
